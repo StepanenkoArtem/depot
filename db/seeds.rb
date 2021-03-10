@@ -5,3 +5,40 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Product.create!(
+  title: 'Squirel',
+  description: %(Pellentesque massa placerat duis ultricies lacus sed. Tempus quam
+    ellentesque nec nam aliquam sem et. Phasellus vestibulum lorem sed risus ultricies
+    unc id cursus metus aliquam eleifend mi in nulla. Maecenas pharetra convallis
+    posuere morbi leo. Volutpat ac tincidunt vitae semper quis. In fermentum et
+    sollicitudin ac orci phasellus egestas tellus rutrum. Suspendisse in est ante in
+    nibh mauris. Luctus accumsan tortor posuere ac ut consequat semper viverra nam.
+    Montes nascetur ridiculus mus mauris vitae ultricies leo integer. Laoreet non
+    curabitur gravida arcu. Eget gravida cum sociis natoque penatibus. Elementum
+    sagittis vitae et leo duis. Donec ac odio tempor orci dapibus ultrices in. In vitae
+    turpis massa sed elementum tempus. Dolor sed viverra ipsum nunc aliquet.),
+    image_url: 'squirel.jpg',
+  price: 19.99
+)
+Product.create!(
+  title: 'tiger',
+  description: %(Bibendum enim facilisis gravida neque convallis a cras.
+    Nisi scelerisque eu ultrices vitae auctor.
+    Venenatis cras sed felis eget velit aliquet sagittis id consectetur.
+    Feugiat nisl pretium fusce id velit.
+    Urna condimentum mattis pellentesque id nibh tortor.
+    Amet volutpat consequat mauris nunc.
+    Eu turpis egestas pretium aenean. Euismod elementum nisi quis eleifend quam
+    adipiscing. Posuere urna nec tincidunt praesent semper feugiat.
+    Ultrices vitae auctor eu augue ut. Dictum at tempor commodo ullamcorper a.
+    Faucibus turpis in eu mi bibendum neque egestas congue quisque.
+    Massa id neque aliquam vestibulum morbi blandit cursus.
+    Quam elementum pulvinar etiam non quam lacus suspendisse faucibus interdum.
+    Auctor urna nunc id cursus metus aliquam. Diam maecenas ultricies mi eget.
+    Pellentesque habitant morbi tristique senectus.
+    Magna fermentum iaculis eu non diam phasellus vestibulum.
+    Morbi tristique senectus et netus et malesuada fames ac turpis.
+    Id diam maecenas ultricies mi.),
+  image_url: 'tiger.jpg',
+  price: 199.99
+)
