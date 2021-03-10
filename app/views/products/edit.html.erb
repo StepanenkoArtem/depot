@@ -1,6 +1,8 @@
-<h1>Editing Product</h1>
-
-<%= render 'form', product: @product %>
-
-<%= link_to 'Show', @product %> |
-<%= link_to 'Back', products_path %>
+<div class="col">
+  <h1 class="h3">Editing Product</h1>
+  <%= render 'form', product: @product %>
+  <div class="d-inline">
+    <%= link_to 'Show', @product, class: "btn btn-sm btn-secondary text-light" %> |
+    <%= link_to 'Back', products_path, class: "btn btn-sm btn-secondary text-light" %>
+  </div>
+</div>
