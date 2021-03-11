@@ -12,11 +12,13 @@
   </head>
 
   <body>
-  <header></header>
-  <aside></aside>
   <main class="container">
+  <%= render 'shared/header' %>
     <div class="row">
-      <%= yield %>
+      <%= render 'shared/menu' %>
+      <section class="col-10">
+        <%= yield %>
+      </section>
     </div>
   </main>
   <footer></footer>
