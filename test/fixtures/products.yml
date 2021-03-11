@@ -6,14 +6,26 @@ one:
   image_url: cat.jpg
   price: 99.99
 
-two:
+invalid_image_url:
   title: dogs
   description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-  image_url: dog.jpg
+  image_url: dog.pdf
   price: 9.99
 
-squirel:
+short_description:
   title: squirel
-  description: Lorem ipsum olor sit amet, consectetur adipiscing elit, sed do eiusmod olor sit amet, consectetur adipiscing elit, sed do eiusmod. 
+  description: Lorem ipsum  
   image_url: squrel.jpg
-  price: 0.00
+  price: 0.99
+
+invalid_zero_price:
+  title: dogs
+  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+  image_url: dog.pdf
+  price: 0
+
+non_numerical_price:
+  title: dogs
+  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+  image_url: dog.pdf
+  price: some price
