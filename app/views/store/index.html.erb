@@ -1,0 +1,22 @@
+<div class="col-12 justify-content-between m-3">
+  <h1 class="h3">Our photos</h1>
+</div>
+<div class="row">
+  <% @products.each do |product| %>
+    <div class="col-6 col-md-6 col-lg-4 col-xl-3 mb-3 d-flex align-items-stretch">
+      <div class="card">
+        <div>
+        <%= image_tag product.image_url, class: "img-thumbnail" %>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= product.title %></h5>
+          <p class="card-text"><%= truncate product.description, length: 100 %></p>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <a href="#" class="btn btn-sm btn-success">Add to cart</a>
+          <%= simple_format number_to_currency(product.price, precision: 2), class: "h4" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
