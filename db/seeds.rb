@@ -18,7 +18,7 @@ Product.create!(
     sagittis vitae et leo duis. Donec ac odio tempor orci dapibus ultrices in. In vitae
     turpis massa sed elementum tempus. Dolor sed viverra ipsum nunc aliquet.),
   image_url: 'squirel.jpg',
-  price: 19.99
+  price: 1.99
 )
 Product.create!(
   title: 'Tiger',
@@ -40,19 +40,19 @@ Product.create!(
     Morbi tristique senectus et netus et malesuada fames ac turpis.
     Id diam maecenas ultricies mi.),
   image_url: 'tiger.jpg',
-  price: 199.99
+  price: 8.99
 )
 Product.create!(
   title: 'Dog',
   description: %(Sed vulputate mi sit amet mauris. Ultrices mi tempus imperdiet nulla. Pulvinar elementum integer enim neque volutpat ac. Odio aenean sed adipiscing diam donec. Tempus imperdiet nulla malesuada pellentesque elit eget gravida. Tristique magna sit amet purus gravida quis blandit turpis. Risus at ultrices mi tempus imperdiet. At erat pellentesque adipiscing commodo elit at imperdiet dui accumsan. Pellentesque nec nam aliquam sem. Rhoncus mattis rhoncus urna neque viverra justo nec. Tincidunt tortor aliquam nulla facilisi cras fermentum. Vestibulum lorem sed risus ultricies tristique nulla aliquet enim. Elementum facilisis leo vel fringilla est. Quis viverra nibh cras pulvinar mattis. Felis imperdiet proin fermentum leo vel. Tortor id aliquet lectus proin nibh nisl. Quam id leo in vitae turpis massa sed. Mauris nunc congue nisi vitae suscipit tellus mauris. Sit amet consectetur adipiscing elit ut aliquam purus.),
   image_url: 'dog.jpg',
-  price: 79.99
+  price: 4.99
 )
 
 Product.create!(
   title: 'Cat',
   description: %(Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.),
   image_url: 'cat.jpg',
-  price: 49.99
+  price: 9.99
 )
 
