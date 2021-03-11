@@ -21,9 +21,10 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
            params: {
              product: {
                description: @product.description,
-               image_urfixl: @product.image_url,
+               image_url: @product.image_url,
                price: @product.price,
-               title: @product.title
+               # randomization product title for passing tests
+               title: @product.title << rand(1000)
              }
            }
     end
