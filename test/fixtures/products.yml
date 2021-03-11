@@ -15,7 +15,7 @@ invalid_image_url:
 short_description:
   title: squirel
   description: Lorem ipsum  
-  image_url: squrel.jpg
+  image_url: squirel.jpg
   price: 0.99
 
 invalid_zero_price:
