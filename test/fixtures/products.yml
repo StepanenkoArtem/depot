@@ -8,17 +8,23 @@ one:
 
 invalid_image_url:
   title: dogs
-  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+  description: ''
   image_url: dog.pdf
+  price: 9.99
+
+valid_image_url:
+  title: dogs
+  description: ''
+  image_url: dog.jpg
   price: 9.99
 
 short_description:
   title: squirel
-  description: Lorem ipsum  
+  description: Lorem ipsum dolo 
   image_url: squirel.jpg
   price: 0.99
 
-invalid_zero_price:
+zero_price:
   title: dogs
   description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
   image_url: dog.pdf

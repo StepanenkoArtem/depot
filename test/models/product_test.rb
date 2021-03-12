@@ -14,14 +14,14 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   test 'price is zero' do
-    product = prepare products :invalid_zero_price
-    product.invalid?
+    product = prepare products :zero_price
+    product.valid?
     assert product.errors[:price].any?
   end
 
   test 'price not numerical' do
     product = prepare products :non_numerical_price
-    product.invalid?
+    product.valid?
     assert product.errors[:price].any?
   end
 
@@ -35,5 +35,11 @@ class ProductTest < ActiveSupport::TestCase
     product = prepare products :invalid_image_url
     product.invalid?
     assert product.errors[:image_url].any?
+  end
+
+  test 'valid image url' do
+    product = prepare products :valid_image_url
+    product.valid?
+    assert product.errors[:image_url].empty?
   end
 end
