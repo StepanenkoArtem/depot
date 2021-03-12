@@ -10,6 +10,6 @@
     <p class="h4 mb-2">
       <%= number_to_currency(@product.price, precision: 2) %>
     </p>
-    <%= render partial: "cart_button", locals: { product: @product }%>
+    <%= render partial: "carts/button", locals: { product: @product }%>
   </div>
 </div>
