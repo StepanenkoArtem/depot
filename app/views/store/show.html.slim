@@ -1,0 +1,9 @@
+h1.h2 =@product.title
+.row
+  .col-4
+    = image_tag @product.image_url, class: "img-fluid"
+  .col-8
+    = sanitize @product.description
+    p.h4.mb-2
+      = number_to_currency(@product.price, precision: 2)
+    = render partial: "carts/button", locals: { product: @product }
