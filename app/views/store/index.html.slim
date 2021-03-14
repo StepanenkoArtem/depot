@@ -1,0 +1,17 @@
+.col-12.justify-content-between.m-3
+  h1.h3
+    | Our photos
+.row
+  - @products.each do |product|
+    .col-6.col-md-6.col-lg-4.col-xl-3.mb-3.d-flex.align-items-stretch
+      .card
+        div
+          = image_tag product.image_url, class: "img-thumbnail"
+        .card-body
+          h5.card-title
+            = link_to product.title, store_item_id_url(product.id)
+          p.card-text
+            = truncate product.description, length: 100
+        .card-footer.d-flex.justify-content-between
+          = render partial: "carts/button", locals: { product: product }
+          = simple_format number_to_currency(product.price, precision: 2), class: "h4"

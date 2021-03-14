@@ -1,0 +1,8 @@
+.col
+  h1.h3
+    | Editing Product
+  = render 'form', product: @product
+  .d-inline
+    = link_to 'Show', @product, class: "btn btn-sm btn-secondary text-light"
+    |  | 
+    = link_to 'Back', products_path, class: "btn btn-sm btn-secondary text-light"

@@ -1,0 +1,42 @@
+p#notice
+  = notice
+.col-sm
+  .d-flex.justify-content-between.m-3
+    h1.h3
+      | Products
+    = link_to ' + New Product', new_product_path, class: "btn btn-sm btn-success text-light"
+  table.table.mt-3
+    thead
+      tr
+        th[scope="col"]
+          | Image
+        th[scope="col"]
+          | Title
+        th[scope="col"]
+          | Description
+        th
+          | Price
+        th[scope="col"]
+          | Operations
+    tbody
+      - @products.each do |product|
+        tr
+          td
+            = image_tag(product.image_url, class: "img-fluid", width: "500")
+          td
+            = product.title
+          td
+            = product.description
+          td
+            = product.price
+          td
+            ul.list-unstyled
+              li
+                = link_to 'Show', product, class: "btn btn-sm btn-outline-secondary m-1"
+              li
+                = link_to 'Edit', edit_product_path(product), class: "btn btn-sm btn-outline-secondary m-1"
+              li
+                = link_to 'Destroy',
+                -                     product, method: :delete, 
+                -                     data: { confirm: 'Are you sure?' },
+                -                     class: "btn btn-sm btn-outline-danger text-danger m-1"
