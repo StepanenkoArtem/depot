@@ -36,7 +36,6 @@ p#notice
               li
                 = link_to 'Edit', edit_product_path(product), class: "btn btn-sm btn-outline-secondary m-1"
               li
-                = link_to 'Destroy',
-                -                     product, method: :delete, 
-                -                     data: { confirm: 'Are you sure?' },
-                -                     class: "btn btn-sm btn-outline-danger text-danger m-1"
+                = link_to 'Destroy', product, method: :delete, \
+                                    data: { confirm: 'Are you sure?' }, \
+                                    class: "btn btn-sm btn-outline-danger text-danger m-1"
