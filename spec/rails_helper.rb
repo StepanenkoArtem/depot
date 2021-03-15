@@ -3,8 +3,12 @@ require 'spec_helper'
 require 'simplecov'
 require 'rspec/simplecov'
 
+SimpleCov.start "rails" do
+  add_filter '/bin/'
+  add_filter '/db/'
+  add_filter '/test/' # for minitest
+end
 SimpleCov.minimum_coverage 75
-SimpleCov.start "rails"
 
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
