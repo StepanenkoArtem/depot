@@ -33,12 +33,14 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '>= 3.26'
   gem 'slim-rails'
+  gem 'slim_lint', require: false
   gem 'rspec-rails', '~> 4.1.0'
   gem 'factory_bot_rails'
   gem 'simplecov', require: false
   gem 'rspec-simplecov'
   gem 'simplecov-console', require: false
   gem 'faker'
+  gem 'rubocop'
 end
 
 group :development do
