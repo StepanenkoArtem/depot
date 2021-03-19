@@ -1,35 +1,34 @@
 class CartsController < ApplicationController
   before_action :set_cart, only: %i[ show edit update destroy ]
 
-  # GET /carts or /carts.json
-  def index
-    @carts = Cart.all
-  end
-
-  # GET /carts/1 or /carts/1.json
   def show
   end
 
-  # GET /carts/new
-  def new
-    @cart = Cart.new
+  def checkout
+    @cart = Cart.find(session[:cart_id])
+    respond_to do |format|
+      format.html { render :show }
+    end
   end
 
-  # GET /carts/1/edit
-  def edit
-  end
-
-  # POST /carts or /carts.json
   def create
     @cart = Cart.new(cart_params)
     respond_to do |format|
       if @cart.save
-        format.html { redirect_to @cart, notice: "Cart was successfully created." }
+        format.html { redirect_to @cart }
         format.json { render :show, status: :created, location: @cart }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @cart.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def erase
+    @cart = Cart.find(session[:cart_id])
+    @cart.erase
+    respond_to do |format|
+      format.html { redirect_to :checkout }
     end
   end
 
@@ -50,7 +49,7 @@ class CartsController < ApplicationController
   def destroy
     @cart.destroy
     respond_to do |format|
-      format.html { redirect_to carts_url, notice: "Cart was successfully destroyed." }
+      format.html { redirect_to @cart, notice: "Cart was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -63,6 +62,6 @@ class CartsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cart_params
-      params.fetch(:cart, {})
+      params.require(:cart).permit(:id)
     end
 end
