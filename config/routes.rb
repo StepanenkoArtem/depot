@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   post "/checkout/", to: "carts#checkout", as: "checkout"
   get  "/checkout/", to: "carts#checkout"
   patch "/cart/erase/", to: "carts#erase", as: "cart_erase"
+
+  post "/thank-you", to: "orders#show", as: "thank_you"
+  get "/orders/", to: "orders#show"
+  post "/orders/new", to: "orders#new"
   post "/line_items/", to: "line_items#create"
 
   resources :store
