@@ -11,4 +11,11 @@ class Cart < ApplicationRecord
     current_item
   end
 
+  def total
+    line_items.each.map { |i| i.quantity * i.product.price.to_f }.sum.round(2)
+  end
+
+  def erase
+    line_items.each.map(&:destroy)
+  end
 end
