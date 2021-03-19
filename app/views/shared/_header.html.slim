@@ -1,5 +1,8 @@
-header.border.rounded.bg-info
-  .d-line.h1
-    | PhotoStore
-  .d-inline
-    = render partial: "carts/preview"
+header.bg-info
+  .row
+    .col-10
+      h1.h3.text-light.p-3
+        | Photo Store
+    .col-2
+      - if @cart
+        = render @cart

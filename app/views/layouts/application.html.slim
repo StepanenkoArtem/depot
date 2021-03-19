@@ -14,7 +14,8 @@ html
     main.container
       = render 'shared/header'
       .row
-        = render 'shared/menu'
+        aside.col-2
+          = render 'shared/menu'
         section.col-10
           == yield
   footer
