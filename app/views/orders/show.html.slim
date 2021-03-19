@@ -1,4 +1,5 @@
-p#notice = notice
+p.alert-success
+  = notice
 
 p
   strong Name:
@@ -15,7 +16,3 @@ p
 p
   strong Payment method:
   = @order.payment_method
-
-=> link_to 'Edit', edit_order_path(@order)
-'|
-=< link_to 'Back', orders_path

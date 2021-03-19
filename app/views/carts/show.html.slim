@@ -28,7 +28,7 @@
         store_index_path, method: :get, \
         type: "button", class: "btn btn-success"
       td 
-        = button_to 'Confirm order', new_order_path, method: :get, class: "btn btn-warning" 
+        = button_to 'Confirm order', new_order_path, method: :post, class: "btn btn-warning" 
 - else
   h1.h2
     | Your cart is empty

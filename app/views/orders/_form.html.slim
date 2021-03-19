@@ -1,24 +1,29 @@
-= form_for @order do |f|
-  - if @order.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@order.errors.count, "error")} prohibited this order from being saved:"
-      ul
-        - @order.errors.full_messages.each do |message|
-          li = message
-
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :address
-    = f.text_area :address
-  .field
-    = f.label :phone
-    = f.text_field :phone
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    = f.label :payment_method
-    = f.number_field :payment_method
-  .actions = f.submit
+= form_with(model: order, local: true, method: :post) do |f|
+  .form-group 
+    .field
+      = f.label :name
+      = f.text_field :name, class: "form-control"
+      - order.errors.full_messages_for(:name).each do |message|
+        = simple_format message, class: "badge alert-danger m-1"
+    .field
+      = f.label :address
+      = f.text_area :address, class: "form-control"
+      - order.errors.full_messages_for(:address).each do |message|
+        = simple_format message, class: "badge alert-danger m-1"
+    .field
+      = f.label :phone
+      = f.text_field :phone, class: "form-control"
+      - order.errors.full_messages_for(:phone).each do |message|
+        = simple_format message, class: "badge alert-danger m-1"
+    .field
+      = f.label :email
+      = f.email_field :email, class: "form-control"
+      - order.errors.full_messages_for(:email).each do |message|
+        = simple_format message, class: "badge alert-danger m-1"
+    .field
+      = f.label :payment_method
+      = f.select :payment_method, Order.payment_methods.keys, class: "form-control"
+      - order.errors.full_messages_for(:payment_method).each do |message|
+        = simple_format message, class: "badge alert-danger m-1"
+  .actions
+    = f.submit 'Confirm order', class: "btn btn-success"
