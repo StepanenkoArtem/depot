@@ -1,0 +1,5 @@
+| Total sum: 
+= @cart.total
+= button_to 'Checkout', \
+  checkout_path, params: { id: @cart }, \
+  class: "btn btn-sm btn-success"
