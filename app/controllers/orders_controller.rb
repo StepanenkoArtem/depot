@@ -25,7 +25,8 @@ class OrdersController < ApplicationController
       if @order.save
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
-        format.html { render :show, notice: "Order was successfully created." }
+        session[:order_id] = @order.id
+        format.html { redirect_to thank_you_path, notice: "Order was successfully created." }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -59,12 +60,12 @@ class OrdersController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_order
-    @order = Order.find(params[:id])
+    @order = Order.find(session[:order_id])
   end
 
   # Only allow a list of trusted parameters through.
   def order_params
-    params.require(:order).permit(:name, :address, :phone, :email, :payment_method, :id)
+    params.require(:order).permit(:name, :address, :phone, :email, :payment_method)
   end
 
   def ensure_cart_isnt_empty
