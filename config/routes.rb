@@ -8,11 +8,11 @@ Rails.application.routes.draw do
   patch "/cart/erase/", to: "carts#erase", as: "cart_erase"
 
   post "/thank-you", to: "orders#show", as: "thank_you"
-  get "/orders/", to: "orders#show"
+  get "/thank-you", to: "orders#show"
   post "/orders/new", to: "orders#new"
+  
   post "/line_items/", to: "line_items#create"
 
   resources :store
-
   resources :products
 end
