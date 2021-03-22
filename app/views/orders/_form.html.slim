@@ -22,7 +22,7 @@
         = simple_format message, class: "badge alert-danger m-1"
     .field
       = f.label :payment_method
-      = f.select :payment_method, Order.payment_methods.keys, class: "form-control"
+      = f.select :payment_method, Order.payment_methods.keys, {}, class: "form-control"
       - order.errors.full_messages_for(:payment_method).each do |message|
         = simple_format message, class: "badge alert-danger m-1"
   .actions
