@@ -41,6 +41,7 @@ group :development, :test do
   gem 'simplecov-console', require: false
   gem 'faker'
   gem 'rubocop'
+  gem 'database_cleaner-active_record'
 end
 
 group :development do
