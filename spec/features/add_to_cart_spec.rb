@@ -3,8 +3,7 @@ require 'rails_helper'
 feature 'Add to cart' do
   before(:each) do
     10.times do
-      @product = create(:product, image_url: 'cat.jpg')
-      puts @product.title
+      create(:product, image_url: 'cat.jpg')
     end
   end
 
