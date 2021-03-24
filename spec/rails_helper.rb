@@ -10,15 +10,29 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'support/database_cleaner'
 require 'simplecov'
+require 'simplecov-console'
 require 'rspec/simplecov'
 
 SimpleCov.start "rails" do
-  add_filter '/bin/'
-  add_filter '/db/'
-  add_filter '/test/' # for minitest
+  add_filter [
+    '/helpers/',
+    '/mailers/',
+    '/channels/',
+    '/db/',
+    '/bin/',
+    '/test/',
+    '/jobs'
+  ]
 end
 
 SimpleCov.minimum_coverage 85
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
+  [
+    SimpleCov::Formatter::HTMLFormatter,
+    SimpleCov::Formatter::Console
+  ]
+)
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
