@@ -1,12 +1,15 @@
 class Order < ApplicationRecord
-  has_many :line_items, dependent: :destroy
+  has_many :line_items, dependent: :destroy, inverse_of: :order
 
   enum payment_method: {
     "Check" => 0,
     "Credit card" => 1,
     "Purchase order" => 2
   }
-
+  validates :line_items, length: {
+    minimum: 1,
+    too_short: "Order must have at least %{count} line item(s)"
+  }
   validates :email, :address, :phone, presence: true
   validates :name, presence: true
   validates :payment_method, inclusion: payment_methods.keys
