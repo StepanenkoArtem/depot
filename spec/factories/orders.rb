@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :order do
-    name { "MyString" }
-    address { "MyText" }
-    phone { "MyString" }
-    email { "MyString" }
-    payment_method { 1 }
+    name { Faker::Name.name }
+    address { Faker::Address.full_address }
+    phone { Faker::PhoneNumber.cell_phone_in_e164 }
+    email { Faker::Internet.email }
+    payment_method { Order.payment_methods.values.sample }
   end
 end
