@@ -28,11 +28,13 @@ RSpec.describe Product, type: :model do
   end
 
   context "title not uniquess" do
-    it 'create duplicate product' do
+    before do
       @duplicate = create(:product)
       @duplicate.title = subject.title
+    end
+
+    it 'create duplicate product' do
       expect(@duplicate.save).to be_falsey
     end
   end
 end
-
