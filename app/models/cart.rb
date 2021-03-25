@@ -16,6 +16,6 @@ class Cart < ApplicationRecord
   end
 
   def erase
-    line_items.each.map(&:destroy)
+    line_items.destroy_all
   end
 end
