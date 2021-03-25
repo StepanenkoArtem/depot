@@ -26,7 +26,7 @@ SimpleCov.start "rails" do
 end
 
 SimpleCov.minimum_coverage 85
-
+SimpleCov::Formatter::Console.show_covered = true
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
   [
     SimpleCov::Formatter::HTMLFormatter,
