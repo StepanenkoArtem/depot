@@ -41,3 +41,6 @@ yarn-debug.log*
 
 # Ignore generated test overage
 /coverage/*
+
+# Ignore IDE autosave files
+*~
