@@ -9,7 +9,7 @@ class Product < ApplicationRecord
   validates :description, length: { minimum: 100 }
   validates :image_url,
             format: {
-              with: /\w+.(jpg|gif|png)/,
+              with: /\w+.(jpg|gif|png|svg)/,
               message: 'must be a URL for GIF, JPG or PNG image.'
             }
   validates :price, presence: true, numericality: { greater_than: 0.00 }
