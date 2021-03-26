@@ -2,9 +2,7 @@ require 'rails_helper'
 
 feature 'Add to cart' do
   before(:each) do
-    10.times do
-      create(:product, image_url: 'cat.jpg')
-    end
+    create_list(:product, 10, :with_image_url)
   end
 
   scenario 'random item' do
