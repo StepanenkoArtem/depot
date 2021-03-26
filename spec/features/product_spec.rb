@@ -39,4 +39,14 @@ feature "create" do
     expect(page.has_text?(product_example.description)).to be_truthy
     expect(page.has_text?(product_example.price)).to be_truthy
   end
+  scenario "with invalid description" do
+    product_new_page.load
+    product_example.description = ""
+    # fill the form with product example
+    product_new_page.fill_form_with(product_example)
+    product_new_page.submit
+    # check product attribute displayed on product page
+    expect(page.current_path).to be_eql product_new_page.current_path
+  end
+
 end
