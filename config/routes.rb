@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   post "/thank-you", to: "orders#show", as: "thank_you"
   get "/thank-you", to: "orders#show"
   post "/orders/new", to: "orders#new"
-  
   post "/line_items/", to: "line_items#create"
 
   resources :store
