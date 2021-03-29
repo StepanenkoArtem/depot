@@ -1,25 +1,25 @@
 require 'rails_helper'
 
 feature "Display products" do
-  let(:products_page) { ProductsIndexPage.new }
+  let(:all_products_page) { IndexProductPage.new }
 
   scenario "all existing products" do
     create_list(:product, 10, :with_image_url)
-    products_page.load
+    all_products_page.load
     # check products table contain 10 rows of products
-    expect(products_page.rows.count).to be(10)
+    expect(all_products_page.items.count).to be(10)
   end
 
   scenario "random product with attributes" do
     # create single product instance
     @product = create(:product, :with_image_url)
-    products_page.load
+    all_products_page.load
     # get row contains attributes of product from table
-    @row = products_page.rows.sample
+    @item = all_products_page.items.sample
     # check all attrubute presence in product table row
-    expect(@row.has_text?(@product.title)).to       be_truthy
-    expect(@row.has_text?(@product.description)).to be_truthy
-    expect(@row.has_text?(@product.price)).to       be_truthy
+    expect(@item.has_text?(@product.title)).to       be_truthy
+    expect(@item.has_text?(@product.description)).to be_truthy
+    expect(@item.has_text?(@product.price)).to       be_truthy
   end
 end
 
@@ -130,5 +130,18 @@ feature "edit product" do
 
     # And description error alert should be displayed
     expect(edit_product_page.form.has_price_alert?).to be_truthy
+  end
+end
+
+feature "delete product" do
+  let(:all_products_page) { IndexProductPage.new }
+
+  scenario "delete existing product" do
+    # create bunch of products before test
+    create_list(:product, 10, :with_image_url)
+    all_products_page.load
+    items_count_before = all_products_page.items.count
+    all_products_page.items.sample.destroy_button.click
+    expect(all_products_page.items.count).to be == (items_count_before - 1)
   end
 end
