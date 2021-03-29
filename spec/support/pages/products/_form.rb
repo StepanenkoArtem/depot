@@ -25,17 +25,3 @@ class Form < SitePrism::Section
     submit_button.click
   end
 end
-
-class CreateProductPage < SitePrism::Page
-  set_url '/products/new'
-  section :form, Form, '[action="/products"]'
-end
-
-class EditProductPage < SitePrism::Page
-  set_url '/products/{product_id}/edit'
-  section :form, Form, '[action^="/products/"]'
-end
-
-class ViewProductPage < SitePrism::Page
-  set_url "/products{/product_id}"
-end
