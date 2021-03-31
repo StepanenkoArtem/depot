@@ -10,7 +10,13 @@ class Order < ApplicationRecord
     minimum: 1,
     too_short: "Order must have at least %<count>s line item(s)"
   }
-  validates :email, :address, :phone, presence: true
+  validates :address, :email, :phone, presence: true
+  validates_format_of :email, with: URI::MailTo::EMAIL_REGEXP
+  # need to add validation maximum local path length of email less the 64
+  # need to add validation email for slash
+
+  # validates_format_of :phone
+
   validates :name, presence: true
   validates :payment_method, inclusion: payment_methods.keys
 
