@@ -7,8 +7,8 @@ FactoryBot.define do
     payment_method { Order.payment_methods.values.sample }
 
     trait :with_line_items do
-      after(:build) do |order|
-        order.line_items = FactoryBot.create_list(:line_item, rand(1..10))
+      after(:build) do |cart|
+        cart.line_items = create_list(:line_item, rand(1..10))
       end
     end
   end
