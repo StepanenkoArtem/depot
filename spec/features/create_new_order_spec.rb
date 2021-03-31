@@ -1,19 +1,22 @@
 require 'rails_helper'
 
-RSpec.feature "Success checkout", type: :feature do
-  pending
-  let(:product) { build(:product, title: "some animals") }
+feature "Success checkout" do
+  let(:order) { build :order, :with_line_items }
+  let(:new_order_page) { NewOrderPage.new }
+
+  # before { assign :new_order_page, :order }
   scenario "with correct order values" do
-    # create cart with item(s)
+    new_order_page.load
+    byebug
     # visit to checkout page
     # fill form with correct values
     # click confirm
     # check is the page has path for thank_you page
+    expect(page.current_path).to be_eql '/thank-you'
   end
 end
 
-RSpec.feature "Failed checkout", type: :feature do
-  pending
+feature "Failed checkout" do
   scenario "with empty filled form" do
     # add some item to cart
     # visit to checkout page
