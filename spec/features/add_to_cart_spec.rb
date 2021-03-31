@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 feature 'Add to cart' do
-  let(:store_index_page) { StoreProductIndex.new }
-  let(:store_product_page) { StoreProductPage.new }
+  let(:store_index_page)    { StoreProductIndex.new }
+  let(:store_product_page)  { StoreProductPage.new }
 
   before(:each) do
-    create_list(:product, 10, :with_image_url)
+    create_list :product, 10, :with_image_url
     store_index_page.load
   end
 
@@ -14,9 +14,11 @@ feature 'Add to cart' do
     rand(1..5).times do
       store_index_page.cards.sample.add_to_cart.click
     end
-    # click checkout button
+
     store_index_page.header.checkout.click
-    expect(page.current_path).to be_eql '/checkout'
+
+    # CHECK
+    expect(page.current_path).to be_eql cart_view_path
   end
 
   scenario 'add items either from store index page and product page' do
@@ -31,8 +33,9 @@ feature 'Add to cart' do
   scenario 'checkout with empty cart' do
     # click to checkout button while any items ware not added
     store_index_page.header.checkout.click
-    # check loaded page has text that cart is empty
-    expect(page.current_path).to be_eql '/checkout'
-    expect(page.has_text?('Your cart is empty')).to be_truthy
+
+    # CHECK
+    expect(page.current_path).to                      be_eql cart_view_path
+    expect(page.has_text?('Your cart is empty')).to   be_truthy
   end
 end
