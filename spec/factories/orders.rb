@@ -11,5 +11,12 @@ FactoryBot.define do
         cart.line_items = create_list(:line_item, rand(1..10))
       end
     end
+
+    trait :with_invalid_data do
+      name { '' }
+      address { '' }
+      phone { '' }
+      email { '' }
+    end
   end
 end
