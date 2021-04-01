@@ -9,16 +9,13 @@ class Form < SitePrism::Section
   element :submit_button, '[type="submit"]'
 
   # form input alerts when invalid values was inputed
-  element :title_alert,         '.field_with_errors > #product_title'
-  element :description_alert,   '.field_with_errors > #product_description'
-  element :image_alert,         '.field_with_errors > #product_image_url'
-  element :price_alert,         '.field_with_errors > #product_price'
+  elements :alerts, '.field_with_errors'
 
   def fill_with(product)
-    title.set       product.title
-    description.set product.description
-    image_url.set   product.image_url
-    price.set       product.price
+    title.set         product.title
+    description.set   product.description
+    image_url.set     product.image_url
+    price.set         product.price
   end
 
   def submit
