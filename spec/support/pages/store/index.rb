@@ -9,8 +9,14 @@ class StoreProductCard < SitePrism::Section
   element :add_to_cart, 'input[type="submit"]'
 end
 
-class StoreProductIndex < SitePrism::Page
+class StoreIndex < SitePrism::Page
   set_url '/'
   section :header, Header, 'header'
   sections :cards, StoreProductCard, '.card'
+
+  def fill_cart
+    rand(1..5).times do
+      cards.sample.add_to_cart.click
+    end
+  end
 end
