@@ -13,6 +13,13 @@ INVALID_EMAILS = [
   'QA[icon]CHOCOLATE[icon]@test.com]'
 ].freeze
 
+
+INVALID_PHONES_NUMBERS = [
+  '0000',
+  '0735',
+  '+3800564564545'
+].freeze
+
 RSpec.describe Order, type: :model do
   subject { build :order, :with_line_items }
   context "have at least one items" do
@@ -32,9 +39,10 @@ RSpec.describe Order, type: :model do
 
   context "phone number" do
     it "has invalid format" do
-      # replace phone field with few incorrect values
-      # subject saving return false
-      expect(subject.save).to be_falsy
+      INVALID_PHONES_NUMBERS.each do |phone|
+        subject.phone = phone
+        expect(subject.save).to be_falsy
+      end
     end
   end
 end
