@@ -1,26 +1,25 @@
 require 'rails_helper'
+require_relative 'feature_helpers'
 
-feature "Success checkout" do
-  let(:order) { build :order, :with_line_items }
-  let(:new_order_page) { NewOrderPage.new }
-
-  # before { assign :new_order_page, :order }
-  scenario "with correct order values" do
-    new_order_page.load
-    byebug
-    # visit to checkout page
-    # fill form with correct values
-    # click confirm
-    # check is the page has path for thank_you page
-    expect(page.current_path).to be_eql '/thank-you'
+feature 'Order confirm' do
+  before do
+    @cart_page = render_cart_page
+    @order_page = @cart_page.confirm_order
   end
-end
+  scenario "with valid order data" do
+    @valid_order_data = build(:order)
+    @order_page.form.fill_with(@valid_order_data)
+    @order_page.form.submit
 
-feature "Failed checkout" do
+    expect(page.current_path).to be_eql thank_you_path
+  end
+
   scenario "with empty filled form" do
-    # add some item to cart
-    # visit to checkout page
-    # # click confirm without filling any fields
-    # check is the page has alerts
+    @invalid_order_data = build(:order, :with_invalid_data)
+    @order_page.form.fill_with(@invalid_order_data)
+    @order_page.form.submit
+
+    expect(page.current_path).to              be_eql(@order_page.current_path)
+    expect(@order_page.form.has_alerts?).to   be_truthy
   end
 end

@@ -1,41 +1,32 @@
 require 'rails_helper'
+require_relative 'feature_helpers'
 
-feature 'Add to cart' do
-  let(:store_index_page)    { StoreProductIndex.new }
-  let(:store_product_page)  { StoreProductPage.new }
+feature "Fill cart from store page" do
+  let(:cart_page) { ViewCartPage.new }
 
-  before(:each) do
-    create_list :product, 10, :with_image_url
-    store_index_page.load
+  before do
+    @store_page = render_store_page
+    @store_page.load
   end
 
-  scenario 'random items from index store' do
-    # add some randoms products to cart
-    rand(1..5).times do
-      store_index_page.cards.sample.add_to_cart.click
+  context "without any items" do
+    scenario "and try checkout it" do
+      @store_page.header.checkout.click
+
+      expect(page.current_path).to                        be_eql cart_view_path
+      expect(page.has_content?("Your cart is empty")).to  be_truthy
     end
-
-    store_index_page.header.checkout.click
-
-    # CHECK
-    expect(page.current_path).to be_eql cart_view_path
   end
 
-  scenario 'add items either from store index page and product page' do
-    # add random item to cart
-    # visit to random product card and then add it to card
-    # return to store index page
-    # add random item to cart
-    # visit to checkout page
-    # check checkut page has item titles, correct pieces and total sum
-  end
+  context "with few items" do
+    scenario 'and try checkout it' do
+      @store_page.fill_cart
+      @store_page.header.checkout.click
 
-  scenario 'checkout with empty cart' do
-    # click to checkout button while any items ware not added
-    store_index_page.header.checkout.click
-
-    # CHECK
-    expect(page.current_path).to                      be_eql cart_view_path
-    expect(page.has_text?('Your cart is empty')).to   be_truthy
+      expect(cart_page.current_path).to                   be_eql cart_view_path
+      expect(cart_page.has_confirm_order_button?).to      be_truthy
+      expect(cart_page.has_erase_cart_button?).to         be_truthy
+      expect(cart_page.has_continue_purchase_button?).to  be_truthy
+    end
   end
 end

@@ -1,32 +1,26 @@
 require 'rails_helper'
+require_relative 'feature_helpers'
 
-def prepare_cart
-  create_list(:product, 10, :with_image_url)
-  index_product_page = StoreProductIndex.new
-  index_product_page.load
-  index_product_page.cards.sample.add_to_cart.click
-  index_product_page.header.checkout.click
-end
-
-feature "cart view" do
-  let(:view_cart_page) { ViewCartPage.new }
-
-  before(:each) do
-    prepare_cart
+feature "On cart page" do
+  before do
+    @cart_page = render_cart_page
   end
 
   scenario "erase cart" do
-    view_cart_page.erase_cart.click
-    expect(view_cart_page.has_text?("Your cart is empty")).to be_truthy
+    @cart_page.erase_cart
+
+    expect(@cart_page.has_text?("Your cart is empty")).to be_truthy
   end
 
   scenario "continue purchase" do
-    view_cart_page.continue_purchase.click
-    expect(page.current_path).to be_eql store_index_path
+    @cart_page.continue_purchase
+
+    expect(@cart_page.current_path).to be_eql store_index_path
   end
 
-  scenario "confirm_order" do
-    view_cart_page.confirm_order.click
-    expect(page.current_path).to be_eql new_order_path
+  scenario "confirm order" do
+    @cart_page.confirm_order
+
+    expect(@cart_page.current_path).to be_eql new_order_path
   end
 end

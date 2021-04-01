@@ -1,147 +1,87 @@
 require 'rails_helper'
+require_relative 'feature_helpers'
 
-feature "Display products" do
+feature "/products" do
   let(:all_products_page) { IndexProductPage.new }
 
-  scenario "all existing products" do
-    create_list(:product, 10, :with_image_url)
-    all_products_page.load
-    # check products table contain 10 rows of products
-    expect(all_products_page.items.count).to be(10)
+  before { generate_products }
+
+  context "display" do
+    scenario "all" do
+      all_products_page.load
+
+      expect(all_products_page.has_items?).to be_truthy
+    end
+
+    scenario "random product with attributes" do
+      @product = create(:product)
+      all_products_page.load
+
+      expect(all_products_page.has_text?(@product.title)).to       be_truthy
+      expect(all_products_page.has_text?(@product.description)).to be_truthy
+      expect(all_products_page.has_text?(@product.price)).to       be_truthy
+    end
   end
 
-  scenario "random product with attributes" do
-    # create single product instance
-    @product = create(:product, :with_image_url)
-    all_products_page.load
-    # get row contains attributes of product from table
-    @item = all_products_page.items.sample
-    # check all attrubute presence in product table row
-    expect(@item.has_text?(@product.title)).to       be_truthy
-    expect(@item.has_text?(@product.description)).to be_truthy
-    expect(@item.has_text?(@product.price)).to       be_truthy
-  end
-end
+  context "create" do
+    let(:create_product_page) { CreateProductPage.new }
+    let(:view_product_page) { ViewProductPage.new }
 
-feature "create product" do
-  let(:create_product_page) { CreateProductPage.new }
-  let(:view_product_page) { ViewProductPage.new }
+    scenario "with valid attributes" do
+      @product_example = build(:product)
 
-  # generete product with correct attributes without saving to db
-  let(:product_example) { build(:product, :with_image_url) }
+      create_product_page.load
+      create_product_page.form.fill_with(@product_example)
+      create_product_page.form.submit
 
-  scenario "with valid attributes" do
-    create_product_page.load
-    # fill the form with product example
-    create_product_page.form.fill_with(product_example)
-    create_product_page.form.submit
-    # check product attribute displayed on product page
-    expect(page.has_text?(product_example.title)).to        be_truthy
-    expect(page.has_text?(product_example.description)).to  be_truthy
-    expect(page.has_text?(product_example.price)).to        be_truthy
+      expect(page.has_text?(@product_example.title)).to           be_truthy
+      expect(page.has_text?(@product_example.description)).to     be_truthy
+      expect(page.has_text?(@product_example.price)).to           be_truthy
+    end
+
+    scenario "with invalid attributes" do
+      @product_example = build(:product, :with_invalid_attrs)
+
+      create_product_page.load
+      create_product_page.form.fill_with(@product_example)
+      create_product_page.form.submit
+
+      expect(create_product_page.form.has_alerts?).to be_truthy
+    end
   end
 
-  scenario "with invalid description" do
-    # make products description empty
-    product_example.description = ""
+  context "edit" do
+    let(:edit_product_page) { EditProductPage.new }
+    let(:product_example) { create :product }
 
-    create_product_page.load
+    scenario "with valid attributes" do
+      @valid_attributes = build(:product)
+      edit_product_page.load(product_id: product_example.id)
+      edit_product_page.form.fill_with(@valid_attributes)
+      edit_product_page.form.submit
 
-    # fill the form with product example
-    create_product_page.form.fill_with(product_example)
-    create_product_page.form.submit
+      expect(page.has_text?(@valid_attributes.title)).to        be_truthy
+      expect(page.has_text?(@valid_attributes.description)).to  be_truthy
+      expect(page.has_text?(@valid_attributes.price)).to        be_truthy
+    end
 
-    # Current page path should still be the same
-    # expect(page.current_path).to be_eql create_product_page.url
+    scenario "with invalid attributes" do
+      @invalid_attributes = build(:product, :with_invalid_attrs)
+      edit_product_page.load(product_id: product_example.id)
+      edit_product_page.form.fill_with(@invalid_attributes)
+      edit_product_page.form.submit
 
-    # And description error alert should be displayed
-    expect(create_product_page.form.has_description_alert?).to be_truthy
+      expect(edit_product_page.form.has_alerts?).to be_truthy
+    end
   end
 
-  scenario "with invalid price" do
-    # make products description empty
-    product_example.price = ""
+  context "delete" do
+    scenario "existing product" do
+      all_products_page.load
+      @items_count_before = all_products_page.items.count
+      all_products_page.items.sample.destroy_button.click
 
-    create_product_page.load
-
-    # fill the form with product example
-    create_product_page.form.fill_with(product_example)
-    create_product_page.form.submit
-
-    # Current page path should still be the same
-    # Routes for that test passing should b refactored
-    # expect(page.current_path).to be_eql create_product_page.url
-
-    # And description error alert should be displayed
-    expect(create_product_page.form.has_price_alert?).to be_truthy
-  end
-end
-
-feature "edit product" do
-  let(:edit_product_page) { EditProductPage.new }
-
-  # create product before tests
-  let(:product_example) { create(:product, :with_image_url) }
-
-  # generate new valid attributes for products
-  let(:new_attributes) { build(:product, :with_image_url) }
-
-  scenario "with valid attributes" do
-    edit_product_page.load product_id: product_example.id
-    # fill the form with new attributes
-    edit_product_page.form.fill_with(new_attributes)
-    edit_product_page.form.submit
-    # check product attribute displayed on product page
-    expect(page.has_text?(new_attributes.title)).to        be_truthy
-    expect(page.has_text?(new_attributes.description)).to  be_truthy
-    expect(page.has_text?(new_attributes.price)).to        be_truthy
-  end
-
-  scenario "with invalid description" do
-    # make products title empty
-    product_example.title = ""
-
-    edit_product_page.load(product_id: product_example.id)
-
-    # fill the form with product example
-    edit_product_page.form.fill_with(product_example)
-    edit_product_page.form.submit
-
-    # Current page path should still be the same
-    # Routes for that test passing should b refactored
-    # expect(page.current_path).to be_eql create_product_page.url
-
-    # And description error alert should be displayed
-    expect(edit_product_page.form.has_title_alert?).to be_truthy
-  end
-
-  scenario "with invalid price" do
-    # make products description empty
-    product_example.price = 0.00
-
-    edit_product_page.load(product_id: product_example.id)
-
-    # fill the form with product example
-    edit_product_page.form.fill_with(product_example)
-    edit_product_page.form.submit
-
-    # Current page path should still be the same
-    # expect(page.current_path).to be_eql create_product_page.url
-
-    # And description error alert should be displayed
-    expect(edit_product_page.form.has_price_alert?).to be_truthy
-  end
-end
-
-feature "delete product" do
-  let(:all_products_page) { IndexProductPage.new }
-
-  scenario "delete existing product" do
-    # create bunch of products before test
-    create_list(:product, 10, :with_image_url)
-    all_products_page.load
-    items_count_before = all_products_page.items.count
-    all_products_page.items.sample.destroy_button.click
-    expect(all_products_page.items.count).to be == (items_count_before - 1)
+      expect(all_products_page.items.count).to be == (@items_count_before - 1)
+    end
   end
 end
