@@ -29,8 +29,6 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara'
   gem 'slim-rails'
   gem 'slim_lint', require: false
@@ -39,6 +37,7 @@ group :development, :test do
   gem 'faker'
   gem 'rubocop'
   gem 'database_cleaner-active_record'
+  gem 'pry'
 end
 
 group :development do
@@ -61,7 +60,6 @@ group :test do
   gem 'simplecov', require: false
   gem 'rspec-simplecov'
   gem 'simplecov-console', require: false
-  gem 'rack_session_access'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
