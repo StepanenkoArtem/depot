@@ -9,7 +9,7 @@
           = image_tag product.image_url, class: "img-thumbnail"
         .card-body
           h5.card-title
-            = link_to product.title, store_item_id_url(product.id)
+            = link_to product.title, store_url(product.id)
           p.card-text
             = truncate product.description, length: 100
         .card-footer.d-flex.justify-content-between
