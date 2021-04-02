@@ -5,7 +5,7 @@ class ProductRow < SitePrism::Section
 end
 
 class IndexProductPage < SitePrism::Page
-  set_url '/products/'
+  set_url '/products'
 
   sections :items, ProductRow, "tbody tr"
 end

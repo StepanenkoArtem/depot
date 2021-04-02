@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 class ProductTable < SitePrism::Section
   # elements :line_items
 end

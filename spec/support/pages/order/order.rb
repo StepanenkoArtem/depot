@@ -1,4 +1,3 @@
-require 'rails_helper'
 class OrderForm < SitePrism::Section
   # order form inputs
   element :name,            '#order_name'
