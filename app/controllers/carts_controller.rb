@@ -11,9 +11,7 @@ class CartsController < ApplicationController
   def erase
     @cart = Cart.find(session[:cart_id])
     @cart.erase
-    respond_to do |format|
-      format.html { render :show }
-    end
+    render :show
   end
 
   # def update
