@@ -44,3 +44,6 @@ yarn-debug.log*
 
 # Ignore IDE autosave files
 *~
+
+# Ignore IDE settings
+.vscode
